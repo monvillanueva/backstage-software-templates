@@ -54,7 +54,7 @@ spec:
         # allowHosts: 
         #   - github.com
         description: This is ${{ parameters.component_id }}
-        repoUrl: github.com?owner=monvillanueva@repo=${{ parameters.component_id }}
+        repoUrl: github.com?owner=monvillanueva&repo=${{ parameters.component_id }}
         protectDefaultBranch: false
 
     - id: register
