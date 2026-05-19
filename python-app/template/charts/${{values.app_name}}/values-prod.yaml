@@ -1,0 +1,6 @@
+replicaCount: 2
+
+resources: 
+  requests:
+    memory: 60M
+    cpu: 60m

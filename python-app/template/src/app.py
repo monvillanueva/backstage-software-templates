@@ -12,7 +12,9 @@ def info():
             'time': str(datetime.now().isoformat()),
             'hostname': socket.gethostname(),
             'message': 'You are doing great, human! Keep going! You can do it!',
-            'deployed_on': "kubernetes"
+            'deployed_on': "kubernetes",
+            'env': '${{values.app_environment}}',
+            'app_name': '${{values.app_name}}'
         }
     )
 

@@ -1,8 +1,8 @@
 replicaCount: 1
 image:
-  repository: monvillanueva/python-app
+  repository: monvillanueva/${{values.app_name}}
   pullPolicy: IfNotPresent
-  tag: cd67b7a
+  tag: ${{values.app_name}}-${{values.app_environment}}-latest
 imagePullSecrets: []
 nameOverride: ''
 fullnameOverride: ''
@@ -23,7 +23,7 @@ ingress:
   className: nginx
   annotations: {}
   hosts:
-    - host: python-app.test.com
+    - host: ${{values.app_name}}-${{values.app_environment}}.test.com
       paths:
         - path: /
           pathType: Prefix
