@@ -55,6 +55,23 @@ jobs:
         run: |
           sudo curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
           sudo chmod +x /usr/local/bin/argocd
+      - name: Connect Repo and create app
+        shell: bash
+        run: |
+          # Connect repo to argocd if not already connected, then create app if it doesn't exist
+          repo_url="https://github.com/monvillanueva-continous-learning/${{values.app_name}}.git"
+          argocd repo list grep -q $repo_url || argocd repo add $repo_url
+
+          # Create app
+          argocd app get ${{values.app_name}} || argocd app create ${{values.app_name}} \
+            --repo $repo_url \
+            --path charts/${{values.app_name}} \
+            --dest-server https://kubernetes.default.svc \
+            --dest-namespace ${{values.app_environment}} \
+            --values values-${{values.app_environment}}.yaml \
+            --revision main \
+            --sync-policy manual \
+            --sync-option CreateNamespace=true
       - name: Argocd app sync
         shell: bash
         run: |
@@ -66,3 +83,4 @@ jobs:
             --username admin \
             --password ${{ '${{ secrets.ARGOCD_PASSWORD }}' }}
           argocd app sync ${{values.app_name}}
+          argocd app wait ${{values.app_name}} --timeout 180
