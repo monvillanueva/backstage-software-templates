@@ -42,10 +42,10 @@ jobs:
       - name: Modify values file
         shell: bash
         run: |
-          echo ${{ needs.ci.outputs.commit_id }}
+          echo ${{ '${{ needs.ci.outputs.commit_id }}' }}
           sudo apt update
           sudo apt install yq -y
-          sudo yq -yi '.image.tag = "${{ '${{needs.ci.outputs.commit_id}}' }}"' charts/${{values.app_name}}/values-${{values.app_environment}}.yaml
+          sudo yq -yi '.image.tag = "${{ '${{ needs.ci.outputs.commit_id }}' }}"' charts/${{values.app_name}}/values-${{values.app_environment}}.yaml
       - name: Commit changes
         uses: EndBug/add-and-commit@v10
         with:
