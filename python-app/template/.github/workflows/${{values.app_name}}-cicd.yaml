@@ -28,7 +28,8 @@ jobs:
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT  
       - 
         name: Output commit id
-        run: echo "Commit ID: ${{ '${{ steps.vars.outputs.sha_short }}' }}"
+        run: | 
+          echo "Commit ID: ${{ '${{ steps.vars.outputs.sha_short }}' }}"
       -
         name: Build and push
         uses: docker/build-push-action@v7
