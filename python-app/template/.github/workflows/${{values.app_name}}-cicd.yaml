@@ -11,7 +11,7 @@ jobs:
   ci:
     runs-on: ubuntu-latest
     outputs:
-      commit_id: ${{ steps.vars.outputs.sha_short }}
+      commit_id: ${{ ${{ steps.vars.outputs.sha_short }} }}
     steps:
       -
         name: Login to Docker Hub
@@ -26,6 +26,9 @@ jobs:
         name: Set outputs
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT  
+      - 
+        name: Output commit id
+        run: echo "Commit ID: ${{ '${{ steps.vars.outputs.sha_short }}' }}"
       -
         name: Build and push
         uses: docker/build-push-action@v7
