@@ -5,7 +5,7 @@ metadata:
   description: Python application for demonstration purposes, named ${{values.app_name}}
   # Example for optional annotations
   annotations:
-    github.com/project-slug: monvillanueva-continous-learning/${{values.app_name}}
+    github.com/project-slug: monvillanueva-continuous-learning/${{values.app_name}}
     backstage.io/techdocs-ref: dir:.
 spec:
   type: service

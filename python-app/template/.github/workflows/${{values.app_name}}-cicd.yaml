@@ -71,7 +71,7 @@ jobs:
             --password ${{ '${{ secrets.ARGOCD_PASSWORD }}' }}
             
           # Connect repo to argocd if not already connected, then create app if it doesn't exist
-          repo_url="https://github.com/monvillanueva-continous-learning/${{values.app_name}}.git"
+          repo_url="https://github.com/monvillanueva-continuous-learning/${{values.app_name}}.git"
           argocd repo list | grep -q $repo_url || argocd repo add $repo_url
 
           # Create app
